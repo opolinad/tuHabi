@@ -21,20 +21,20 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
 
-  # gateway:
-  #   build:
-  #     context: ./Backend/Gateway
-  #   command: python manage.py runserver 0.0.0.0:8080
-  #   ports:
-  #     - "8080:8080"
-  #   depends_on:
-  #     mysql:
-  #       condition: service_healthy
-  #   networks:
-  #     - habi-network
-  #   restart: always
-  #   volumes:
-  #     - ./Backend/Gateway:/app/src
+  gateway:
+    build:
+      context: ./Backend/Gateway
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - habi-network
+    restart: always
+    volumes:
+      - ./Backend/Gateway:/app/src
 
   favorites:
     build:
