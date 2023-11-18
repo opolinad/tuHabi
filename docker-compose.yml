@@ -20,6 +20,7 @@ services:
       retries: 3
     volumes:
       - mysql-data:/var/lib/mysql
+      - ./habi_dbs.sql:/docker-entrypoint-initdb.d/habi_dbs.sql
 
   gateway:
     build:
