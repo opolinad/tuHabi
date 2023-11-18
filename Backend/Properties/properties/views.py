@@ -1,6 +1,8 @@
 from .models import Property
-from rest_framework import generics
+from rest_framework import generics, status
+from rest_framework.views import APIView
 from .serializers import PropertySerializer
+from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.pagination import PageNumberPagination
 
@@ -15,3 +17,12 @@ class PropertyList(generics.ListAPIView):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['city', 'year', 'actual_status']
     pagination_class = PropertyListPagination
+
+class VerifyProperty(APIView):
+    def get(self, request, property_id):
+        try:
+            property_obj = Property.objects.get(id=property_id)
+            serializer = PropertySerializer(property_obj)
+            return Response({'exists': True, 'message': 'Property exists'})
+        except Property.DoesNotExist:
+            return Response({'exists': False, 'message': 'Property does not exist'}, status=status.HTTP_404_NOT_FOUND)
