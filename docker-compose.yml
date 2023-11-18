@@ -1,0 +1,88 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:8.2.0
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_DATABASE: habi_db
+      MYSQL_USER: pruebas
+      MYSQL_PASSWORD: 12345
+    ports:
+      - "3306:3306"
+    networks:
+      - habi-network
+    restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  # gateway:
+  #   build:
+  #     context: ./Backend/Gateway
+  #   command: python manage.py runserver 0.0.0.0:8080
+  #   ports:
+  #     - "8080:8080"
+  #   depends_on:
+  #     mysql:
+  #       condition: service_healthy
+  #   networks:
+  #     - habi-network
+  #   restart: always
+  #   volumes:
+  #     - ./Backend/Gateway:/app/src
+
+  favorites:
+    build:
+      context: ./Backend/Favorites
+    expose:
+     - "8000"
+    command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - habi-network
+    restart: always
+    volumes:
+      - ./Backend/Favorites:/app/src
+
+  properties:
+    build:
+      context: ./Backend/Properties
+    expose:
+     - "8000"
+    command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - habi-network
+    restart: always
+    volumes:
+      - ./Backend/Properties:/app/src
+
+  # client:
+  #   build:
+  #     context: ./client
+  #   depends_on:
+  #     - gateway
+  #     - favorites
+  #     - properties
+  #   networks:
+  #     - habi-network
+  #   restart: always
+
+networks:
+  habi-network:
+    driver: bridge
+
+volumes:
+  mysql-data:
+  # gateway-data:
+  # favorites-data:
+  properties-data:
