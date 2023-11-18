@@ -1,5 +1,4 @@
 from .models import Property
-from rest_framework import filters
 from rest_framework import generics
 from .serializers import PropertySerializer
 from django_filters.rest_framework import DjangoFilterBackend
