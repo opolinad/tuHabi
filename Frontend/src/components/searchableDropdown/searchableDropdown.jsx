@@ -1,14 +1,17 @@
-'use client'
-import React from 'react';
-import Select from 'react-select'
-import './searchableDropdown.css';
+"use client";
+import React from "react";
+import Select from "react-select";
+import "./searchableDropdown.css";
 
-const SearchableDropdown = ({ options, labelName}) => {
-
+const SearchableDropdown = ({ options, labelName }) => {
   return (
     <div id="searchableDropdown-container">
-      <label>{ labelName }:</label>
-      <Select options={options} isClearable={true} placeholder={'Seleccione...'}/>
+      <label>{labelName}:</label>
+      <Select
+        options={options}
+        isClearable={true}
+        placeholder={"Seleccione..."}
+      />
     </div>
   );
 };
