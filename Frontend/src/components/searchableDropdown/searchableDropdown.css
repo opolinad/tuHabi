@@ -1,0 +1,9 @@
+#searchableDropdown-container{
+    margin: 0 15px;
+    min-width: 300px;
+}
+
+label{
+    font-size: 1.1rem;
+    font-weight: bold;
+}
