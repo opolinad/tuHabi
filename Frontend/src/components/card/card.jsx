@@ -3,7 +3,10 @@
 import React, { useState } from "react";
 import "./card.css";
 
-const Card = ({ imageSrc, location, price, status, id }) => {
+const Card = ({ location, price, status, id }) => {
+  const imgSrc =
+    "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg";
+
   const [isFavorite, setIsFavorite] = useState(false);
 
   const handleToggleFavorite = () => {
@@ -40,7 +43,7 @@ const Card = ({ imageSrc, location, price, status, id }) => {
 
   return (
     <div className="card">
-      <img src={imageSrc} alt="Property" className="card-image stock-image" />
+      <img src={imgSrc} alt="Property" className="card-image stock-image" />
       <div className="card-content flex">
         <div className="card-info">
           <h2 className="card-location">🧭 {location}</h2>
