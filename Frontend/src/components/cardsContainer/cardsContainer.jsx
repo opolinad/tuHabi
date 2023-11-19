@@ -1,11 +1,14 @@
 import React from "react";
 import "./cardsContainer.css";
 import Card from "../card/card";
+import { get } from "@/services/httpService";
 
-const CardsContainer = ({ cards }) => {
+const CardsContainer = async () => {
+  const data = await get(`${process.env.REACT_APP_BACKEND_URL}/properties/`);
+
   return (
     <div className="mx-40 p-3" id="cards-container">
-      {cards.map((card) => (
+      {data.results.map((card) => (
         <Card
           id={card.id}
           location={card.city}
