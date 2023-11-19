@@ -67,16 +67,22 @@ services:
     volumes:
       - ./Backend/Properties:/app/src
 
-  # client:
-  #   build:
-  #     context: ./client
-  #   depends_on:
-  #     - gateway
-  #     - favorites
-  #     - properties
-  #   networks:
-  #     - habi-network
-  #   restart: always
+  client:
+    build:
+      context: ./Frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - gateway
+      - favorites
+      - properties
+    networks:
+      - habi-network
+    restart: always
+    volumes:
+      - ./Frontend:/app
+      - /app/node_modules
+      - /app/.next
 
 networks:
   habi-network:
