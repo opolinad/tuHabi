@@ -1,0 +1,25 @@
+.card{
+    border: 4px var(--main-color) solid;
+    border-radius: 30px;
+    padding: 15px;
+    max-width: 300px;
+    font-size: 1.1rem;
+    margin: 15px;
+}
+
+.card .card-image{
+    border-radius: 15px;
+}
+
+.stock-image{
+    opacity: 0.6;
+    filter: grayscale(100%);
+}
+
+.card .card-content{
+    padding: 15px;
+}
+
+.card .card-favorite{
+    font-size: 2rem;
+}
