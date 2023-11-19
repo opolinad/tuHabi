@@ -90,6 +90,4 @@ networks:
 
 volumes:
   mysql-data:
-  # gateway-data:
-  # favorites-data:
-  properties-data:
+
