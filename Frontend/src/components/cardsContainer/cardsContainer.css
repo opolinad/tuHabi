@@ -3,3 +3,11 @@
     flex-wrap: wrap;
     justify-content: space-between;
 }
+
+#no-results-to-show{
+    font-size: 2rem;
+    text-align: center;
+    font-weight: bold;
+    width: 100%;
+    margin-top: 100px;
+}
