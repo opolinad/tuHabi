@@ -6,11 +6,23 @@ import "./card.css";
 const Card = ({ location, price, status, id }) => {
   const imgSrc =
     "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/home-improvement/wp-content/uploads/2022/07/download-23.jpg";
-
-  const [isFavorite, setIsFavorite] = useState(false);
+  const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+  const [isFavorite, setIsFavorite] = useState(favorites.includes(id));
 
   const handleToggleFavorite = () => {
     setIsFavorite(!isFavorite);
+    const favorites = JSON.parse(localStorage.getItem("favorites"));
+    if (!favorites) {
+      localStorage.setItem("favorites", JSON.stringify([id]));
+    } else {
+      if (favorites.includes(id)) {
+        const index = favorites.indexOf(id);
+        favorites.splice(index, 1);
+      } else {
+        favorites.push(id);
+      }
+      localStorage.setItem("favorites", JSON.stringify(favorites));
+    }
   };
 
   const getStatusIcon = (status) => {
@@ -36,10 +48,10 @@ const Card = ({ location, price, status, id }) => {
   };
 
   const formatPrice = (price) => {
-    const parts = price.toString().split('.');
-    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-    return parts.join('.');
-  }
+    const parts = price.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    return parts.join(".");
+  };
 
   return (
     <div className="card">
